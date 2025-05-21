@@ -18,19 +18,19 @@ app = Flask(__name__)
 if not os.path.exists('/app/logs'):
     os.makedirs('/app/logs')
 
-# Configuration du logging
+# Configure logging
 logger = logging.getLogger('flask_app')
 logger.setLevel(logging.DEBUG)
 
-# Formatter pour les messages de log
+# Create a file handler for logging
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-# Handler pour la console
+# Handler for console output
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 
-# Handler pour le fichier (avec rotation pour limiter la taille)
+# Handler for file output with rotation
 file_handler = RotatingFileHandler('/app/logs/app.log', maxBytes=1000000, backupCount=5)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)

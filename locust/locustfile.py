@@ -1,6 +1,7 @@
 from locust import HttpUser, task, between
 import random
 
+# pool of addresses to simulate user input
 addresses = [
     "485 ROUTE DE WINDSOR",
     "473 ROUTE DE WINDSOR",
@@ -31,21 +32,21 @@ addresses = [
 
 
 class FlaskAppUser(HttpUser):
-    # Temps d'attente entre les tâches (1 à 5 secondes pour simuler un comportement réaliste)
+    # wait_time = between(1, 5)
     wait_time = between(1, 5)
     
-    # URL de base de l'application
+    # URL of the Flask app
     host = "http://xxx.xxx.xxx.xxx"
     
-    @task(2)  # Poids de 2 : les GET sont plus fréquents
+    @task(2)  # weights of 2 for the task
     def get_home(self):
         response = self.client.get("/")
         if response.status_code != 200:
-            response.failure(f"GET /points failed with status {response.status_code}")
+            response.failure(f"GET / failed with status {response.status_code}")
     
-    @task(1)  # Poids de 1 : les POST sont moins fréquents
+    @task(1)  # weights of 1 for the task
     def findpath(self):
-        # Générer des coordonnées aléatoires pour simuler des données variées
+        # Generate random coordinates to simulate varied data
         start = random.choices(addresses)
         end = random.choice(addresses)
         

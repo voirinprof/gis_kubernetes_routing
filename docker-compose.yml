@@ -27,9 +27,9 @@ services:
     restart: always
     env_file:
       - .env
-    # volumes:
-    #   - ./postgis/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
-    #   - ./postgis/userlist.txt:/etc/pgbouncer/userlist.txt
+    volumes:
+      - ./postgis/pgbouncer.ini:/etc/pgbouncer/pgbouncer.ini
+      - ./postgis/userlist.txt:/etc/pgbouncer/userlist.txt
     ports:
       - "5432:5432"
     depends_on:

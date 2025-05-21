@@ -19,7 +19,7 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-    - host: ""  # Règle pour les requêtes sans Host ou avec IP
+    - host: ""  # default backend
       paths:
         - path: /
           pathType: Prefix
@@ -38,5 +38,4 @@ readinessProbe:
   periodSeconds: 5
 
 database:
-  url: "postgresql://qc_user:qc_password@155.138.129.145/qc_routing"
- 
+  url: "postgresql://qc_user:qc_password@xxx.xxx.xxx.xxx/qc_routing"

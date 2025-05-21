@@ -14,12 +14,12 @@ database_url = os.environ.get('DATABASE_URL')
 
 # function to count the number of addresses and streets in the database
 def count_infos_from_db():
-    # Connexion à la base de données
+    # connect to the database
     engine = create_engine(database_url)
     count_addresses = 0
     count_streets = 0
 
-    # Vérifier si la table 'addresses' existe
+    # Check if the 'addresses' table exists
     with engine.connect() as conn:
         table_addresses_exist = conn.execute(text("SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name='addresses')"))
         
@@ -27,13 +27,13 @@ def count_infos_from_db():
         
         # if the table exists, count the number of rows
         if table_addresses_exist.scalar():
-            # Compter le nombre d'adresses
+            # Count the number of addresses
             result = conn.execute(text("SELECT COUNT(*) FROM addresses"))
             count_addresses = result.scalar()
 
         # if the table exists, count the number of rows
         if table_streets_exist.scalar():
-            # Compter le nombre de routes    
+            # Count the number of streets
             result = conn.execute(text("SELECT COUNT(*) FROM streets"))
             count_streets = result.scalar()
         
