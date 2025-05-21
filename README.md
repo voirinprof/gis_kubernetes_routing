@@ -1,4 +1,4 @@
-# Road Network GIS Application (avec kubernetes)
+# Road Network GIS Application (with kubernetes)
 
 This repository contains a PostGIS-based geospatial database setup and a Helm chart for deploying a Flask application with an Nginx frontend (as a load balancer). 
 
