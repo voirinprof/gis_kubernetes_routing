@@ -1,1 +1,2 @@
+"admin" "admin123"
 "qc_user" "qc_password"

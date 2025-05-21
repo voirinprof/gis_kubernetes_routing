@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-flask-routing
+  labels:
+    app: flask-routing
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: flask-routing
+  template:
+    metadata:
+      labels:
+        app: flask-routing
+    spec:
+      containers:
+        - name: flask-routing
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DATABASE_URL
+              value: {{ .Values.database.url | quote }}
+            

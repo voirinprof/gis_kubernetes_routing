@@ -1,4 +1,4 @@
-replicaCount: 5
+replicaCount: 2
 
 image:
   repository: ewr.vultrcr.com/geoimage/flask-routing
@@ -38,5 +38,5 @@ readinessProbe:
   periodSeconds: 5
 
 database:
-  url: "postgres://qc_user:qc_password@localhost/qc_routing"
+  url: "postgresql://qc_user:qc_password@155.138.129.145/qc_routing"
  
