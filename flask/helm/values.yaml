@@ -1,0 +1,42 @@
+replicaCount: 5
+
+image:
+  repository: ewr.vultrcr.com/geoimage/flask-routing
+  tag: latest
+  pullPolicy: Always
+
+imagePullSecrets: 
+  - name: vultr-registry-secret
+  
+service:
+  type: ClusterIP
+  port: 5000
+
+ingress:
+  enabled: true
+  hosts:
+    - host: flask.local
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: ""  # Règle pour les requêtes sans Host ou avec IP
+      paths:
+        - path: /
+          pathType: Prefix
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 5000
+  initialDelaySeconds: 15
+  periodSeconds: 10
+readinessProbe:
+  httpGet:
+    path: /
+    port: 5000
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+database:
+  url: "postgres://qc_user:qc_password@localhost/qc_routing"
+ 
